@@ -1,0 +1,113 @@
+Skip to main content
+LinkedIn
+Account Navigation
+ 
+NLP and Text Analytics Simplified: Document Clustering
+Published on January 12, 2015
+LikedUnlikeNLP and Text Analytics Simplified: Document Clustering38Comment0ShareShare NLP and Text Analytics Simplified: Document Clustering0
+Parsa Ghaffari
+Parsa Ghaffari
+FollowingUnfollowParsa Ghaffari
+CEO, founder at AYLIEN / NLP and Machine Learning
+Introduction
+
+This is our second blog on harnessing Machine Learning (ML) in the form of Natural Language Processing (NLP) for the Automatic Classification of documents. By classifying text, we aim to assign a document or piece of text to one or more classes or categories making it easier to manage or sort. A Document Classifier often returns or assigns a category “label” or “code” to a document or piece of text. Depending on the Classification Algorithm or strategy used, a classifier might also provide a confidence measure to indicate how confident it is that the result is correct.
+
+In our first blog, we looked at a supervised method of Document Classification. In supervised methods, Document Categories are predefined by using a training dataset with manually tagged documents. A classifier is then trained on the manually tagged dataset so that it will be able to predict any given Document’s Category from then on.
+
+In this blog, we will focus on Unsupervised Document Classification. Unsupervised ML techniques differ from supervised in that they do not require a training dataset and in the case of documents, the categories are not known in advance. For example, let’s say we have a large number of emails that we want to analyze as part of an eDiscovery Process. We may have no idea what the emails are about or what topics they deal with and we want to automatically find out what are the most common topics present in the dataset. Unsupervised techniques such as Clustering can be used to automatically discover groups of similar documents within a collection of documents.
+
+An Overview of Document Clustering
+
+Document Clustering is a method for finding structure within a collection of documents, so that similar documents can be grouped into categories. The first step in the Clustering process is to create word vectors for the documents we wish to cluster. A vector is simply a numerical representation of the document, where each component of the vector refers to a word, and the value of that component indicates the presence or importance of that word in the document. The distance matrix between these vectors is then fed to algorithms, which group similar vectors together into clusters. A simple example will help to illustrate how documents might be transformed into vectors.
+
+A simple example of transforming documents into vectors
+
+Using the words within a document as the “features” that describe a document, we need to find a way to represent these features numerically as a vector. As we did in our first blog in the series we will consider three very short documents to illustrate the process.
+
+We start by taking all of the words across the three documents in our training set and create a table or vector from these words.
+
+<some,tigers,live,in,the,zoo,green,is,a,color,he,has,gone,to,New,York>
+
+Then for each of the documents, we create a vector by assigning a 1 if the word exists in the document and a 0 if it doesn’t. In the table below each row is a vector describing a single document.
+
+Preprocessing the data
+
+As we described in our blog on Supervised Methods of Classification it is likely that some preprocessing of the data would be needed prior to creating the vectors. In our simple example, we have given equal importance (a value of 1) to each and every word when creating Document Vectors and no word appears more than once. To improve the accuracy, we could give different weighting to words based on their importance to the document in question and their frequency within the document set as a whole. A common methodology used to do this is TF-IDF (term frequency - inverse document frequency). The TF-IDF weighting for a word increases with the number of times the word appears in the document but decreases based on how frequently the word appears across the entire document set. This has the effect of giving a lower overall weighting to words which occur more frequently in the document set such as “a”, “it”, etc
+
+Clustering Algorithms
+
+In the graph below each “dot” is a vector which represents a document. The graph shows the output from a Clustering Algorithm with an X marking the center of each cluster (known as a ‘centroid’). In this case the vector’s only have two features (or dimensions) and can easily be plotted on a two-dimensional graph as shown below.
+
+K-Means Clustering Algorithm output example:
+
+
+
+Source: http://blog.mpacula.com/2011/04/27/k-means-clustering-example-python/
+
+Two extreme cases to illustrate the concept of discovering the clusters
+
+If we want to group the vectors together into clusters, we first need to look at the two extreme cases to illustrate how it can be done. Firstly, we assume that there is only one cluster and that all of the document vectors belong in this cluster. This is a very simple approach which is not very useful when it comes to managing or sorting the documents effectively.
+
+The second extreme case is to decide that each document is a cluster by itself, so that if we had n documents we would have N clusters. Again, this is a very simple solution with not much practical use.
+
+Finding the K clusters from the N Document Vectors
+
+Ideally from N documents we want to find K distinct clusters that separate the document into useful and meaningful categories. There are many Clustering Algorithms available to help us achieve this. For this blog, we will look at the k-means algorithm in more detail to illustrate the concept.
+
+How many clusters (K)?
+One simple rule of thumb for deciding the optimum number of clusters (K) to have is:
+
+K = sqrt(N/2).
+
+There are many more methods of finding K which can read about here.
+
+Finding the Clusters
+Again, there are many ways we can find clusters. To illustrate the concept we’ll look at the steps used in one popular method, the K-means algorithm which follows the following steps:
+
+Find the value of K using our simple rule of thumb above.
+Randomly assign each of the K cluster centroids throughout the dataset.
+Assign each data point to the cluster whose centroid is closest to it.
+Recompute the centroid location for each cluster as an average of the vector points within the cluster (this will find the new “center” of the cluster).
+Reassign each vector data point to the centroid closest to it i.e. some will now switch from one cluster to another as the centroids positions have changed.
+Repeat steps 4 and 5 until none of the data points switch centroids i.e the clusters have “converged”.
+That’s pretty much it, you now have your n documents assigned to K clusters! If you have difficulty visualising the steps above, watch this excellent video tutorial by Viktor Lavrenko of the University of Edinburgh, which explains it in more depth.
+
+Keep an eye out for more in our “Text Analysis 101” series. The next blog will look at how Topic Modeling is performed.
+
+
+
+LikedUnlikeNLP and Text Analytics Simplified: Document ClusteringCommentShareShare NLP and Text Analytics Simplified: Document Clustering
+Report this
+FollowingUnfollowParsa Ghaffari
+Parsa Ghaffari
+Parsa Ghaffari
+CEO, founder at AYLIEN / NLP and Machine Learning
+11 articles
+0 comments
+
+
+Leave your thoughts here…
+
+Don't miss more articles by Parsa Ghaffari
+
+
+Research at AYLIEN: a call for collaboration
+Parsa Ghaffari on LinkedIn
+
+Leveraging Deep Learning for Multilingual Sentiment Analysis
+Parsa Ghaffari on LinkedIn
+
+News Headline Analysis Using NLP (in Python)
+Parsa Ghaffari on LinkedIn
+Looking for more of the latest headlines on LinkedIn?
+
+Discover more stories
+Help Center About
+Press
+Blog
+Developers
+CareersAdvertisingTalent SolutionsSales SolutionsSmall BusinessMobileLanguage
+Upgrade Your Account LinkedIn Corporation © 2017
+User AgreementPrivacy PolicyAd ChoicesCommunity GuidelinesCookie PolicyCopyright PolicySend Feedback
+144.2.1.1

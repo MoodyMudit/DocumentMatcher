@@ -1,0 +1,147 @@
+Skip to main content
+LinkedIn
+Account Navigation
+ 
+NLP and Text Analytics Simplified: Document Classification
+Published on December 9, 2014
+LikeNLP and Text Analytics Simplified: Document Classification15Comment0ShareShare NLP and Text Analytics Simplified: Document Classification0
+Parsa Ghaffari
+Parsa Ghaffari
+FollowingUnfollowParsa Ghaffari
+CEO, founder at AYLIEN / NLP and Machine Learning
+Introduction
+
+The automatic classification of documents is an example of how Machine Learning (ML) and Natural Language Processing (NLP) can be leveraged to enable machines to better understand human language. By classifying text, we are aiming to assign one or more classes or categories to a document or piece of text, making it easier to manage and sort the documents. Manually categorizing and grouping text sources can be extremely laborious and time-consuming, especially for publishers, news sites, blogs or anyone who deals with a lot of content.
+
+Broadly speaking, there are two classes of ML techniques: supervised and unsupervised. In supervised methods, a model is created based on previous observations i.e. a training set. In the case of document classification, categories are predefined and a training dataset of documents is manually tagged as part of a category. Following the creation of a training dataset, a classifier is trained on the manually tagged dataset. The idea being that, the classifier will then be able to predict any given document’s category from then on.
+
+Unsupervised ML techniques, differ because they do not require a training dataset, and in case of documents, the categories are not known in advance. Unsupervised techniques such as Clustering and Topic Modelling are used to automatically discover groups of similar documents within a collection of documents.In this blog we are going to concentrate on supervised methods of classification.
+
+
+
+What a Classifier does
+
+Classifiers make ‘predictions’, that is their job. In layman terms, when a classifier is fed a new document to classify, it makes a prediction that the document belongs to a particular class or category and often returns or assigns a category “label” for the document. Depending on the classification algorithm or strategy used, the classifier might also provide a confidence measure to indicate how confident it is that the classification label is correct. To explain how a classifier works it is probably best to illustrate with a simple example.
+
+How a Classifier works
+
+As we mentioned classification is about prediction. Take a simple example of predicting whether or not a football game will go ahead to illustrate how this works. First we want to create a dataset. To do this in we would track the outside temperature and whether or not it rained on any given game night over the course of a year to building up a dataset of weather conditions. We could then “tag” this data set with information about whether or not the game went ahead to create a training dataset for future predictions.
+
+In this case, we have two “features.” temperature and rain, to help us predict whether the game will be played or not played. As is illustrated in the table below. On any new match night, we could then reference our table and use it to help us predict whether or not a game would go ahead. In this simple case if the temperature is below zero and it is raining (or snowing!) then there is a good chance that the game will be cancelled.
+
+Temp (Degrees C)	Rain	Play?
+15	No	Yes
+23	Yes	Yes
+-6	Yes	No
+-6	No	Yes
+In the table above, each column is called a “feature”, the “Play?” column is referred to as a “class” or “label” and the rows are called “instances”. These instances can be thought of as data points, which could be represented as a vector, as shown below: 
+
+<feature1, feature2,…, featureN>
+
+A simple Illustration of Document Classification
+
+If we apply a similar methodology to documents we can use the words within a document as the “features” to help us predict the classification of the document. Again, using a simple example:
+
+In this example, we have three very short documents in our training set as shown below:
+
+Reference Document Class 1	Reference Document Class 2	Reference Document Class 3
+Some tigers live in the zoo	Green is a color	Go to New York city
+
+We would start by taking all of the words across the three documents in our training set and creating a table or vector from these words.
+
+
+<some,tigers,live,in,the,zoo,green,is,a,color,go,to,new,york,city> class
+
+Then for each of the training documents, we would create a vector by assigning a 1 if the word exists in the training document and a 0 if it doesn’t, tagging the document with the appropriate class as follows.
+
+some	tigers	live	in	the	zoo	green	is	a	color	go	to	new	york	city	
+1	1	1	1	1	1	0	0	0	0	0	0	0	0	0	class 1
+0	0	0	0	0	0	1	1	1	1	0	0	0	0	0	class 2
+0	0	0	0	0	0	0	0	0	0	1	1	1	1	1	class 3
+When a new untagged document arrives for classification and say it contains the words “Orange is a color” we would create a word vector for it by marking the words which exist in our classification vector.
+
+some	tigers	live	in	the	zoo	green	is	a	color	go	to	new	york	city	
+0	0	0	0	0	0	0	1	1	1	0	0	0	0	0	unknown class
+If we then compare this vector for the document of unknown class to the vectors representing our three document classes, we would see that it most closely resembles the vector for class 2 documents.
+
+Comparison of the unknown document class with class 1 (6 matching terms) 
+
+< 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 > class 1 
+< 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0> Unknown class 
+
+Comparison of the unknown document class with class 2 (14 matching terms - winner!!)
+
+< 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0>class 2 
+< 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0> Unknown class 
+
+Comparison of the unknown document class with class 3 (7 matching terms) 
+
+< 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 > class 3 
+< 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0> Unknown class 
+
+It is then possible to label the new document as a class 2 document with a adequate degree of confidence. This is a very simple but common example of a statistical Natural Language Processing method.
+
+A more detailed look at real world document classification
+
+A real world classifier, has three components to it and we will look at each of these components individually to explain in a little bit more detail how a classifier works.
+
+1. The dataset
+
+As we demonstrated above, a statistical method of classification requires a collection of documents which have been manually tagged with their appropriate category. The quality of this dataset is by far the most important component of a statistical NLP classifier.
+
+The dataset needs to be large enough to have an adequate number of documents in each class. For example if you wished to classify documents into 500 possible categories you may require 100 documents per category so a total of at least 50,000 documents would be required.
+
+The dataset also needs to be of a high enough quality in terms of how distinct the documents in the different categories are from each other to allow clear delineation between the categories.
+
+2. Preprocessing
+
+In our simple examples, we have given equal importance to each and every word when creating document vectors. We could do some preprocessing and decide to give different weighting to words based on their importance to the document in question. A common methodology used to do this is TF-IDF (term frequency - inverse document frequency). The TF-IDF weighting for a word increases with the number of times the word appears in the document but decreases based on how frequently the word appears across the entire document set. This has the effect of giving a lower overall weighting to words which occur more frequently in the document set such as “a”, “it”, etc.
+
+3. Classification Algorithm and Strategy
+
+In our example above, the algorithm we used to classify our document was very simple. We classified the document by comparing the number of matching terms in the document vectors to see which class it most closely resembled. In reality we may be placing documents into more than one category type and we may also be assigning multiple labels to a document within a given category type. We may also have a hierarchical structure in our taxonomy, and therefore require a classifier that takes that into account.
+
+For example, using IPTC International Subject News Codes to assign labels, we may give a document two labels simultaneously such as “sports event - World Cup” and “sport - soccer”, “sports” and “sports event” being the root category and “soccer” and “World Cup” being the child categories.
+
+There are numerous algorithms used in classification such as Support Vector Machines (SVMs), Naive Bayes, Decision Trees the details of which are beyond the scope of this blog.
+
+Conclusion
+
+We hope that you now have a better understanding of the basics if document classification and how it works. As a recap, in supervised methods, a model is created based on a training set. A classifier is then trained on this manually tagged training dataset and is expected to predict any given document’s category from then on. The biggest factor affecting the quality of these predictions is the quality of the training data set. Keep an eye on our blog for more in the “Text Analysis 101” series.
+
+
+
+LikeNLP and Text Analytics Simplified: Document ClassificationCommentShareShare NLP and Text Analytics Simplified: Document Classification
+Report this
+FollowingUnfollowParsa Ghaffari
+Parsa Ghaffari
+Parsa Ghaffari
+CEO, founder at AYLIEN / NLP and Machine Learning
+11 articles
+0 comments
+
+
+Leave your thoughts here…
+
+Don't miss more articles by Parsa Ghaffari
+
+
+Research at AYLIEN: a call for collaboration
+Parsa Ghaffari on LinkedIn
+
+Leveraging Deep Learning for Multilingual Sentiment Analysis
+Parsa Ghaffari on LinkedIn
+
+News Headline Analysis Using NLP (in Python)
+Parsa Ghaffari on LinkedIn
+Looking for more of the latest headlines on LinkedIn?
+
+Discover more stories
+Help Center About
+Press
+Blog
+Developers
+CareersAdvertisingTalent SolutionsSales SolutionsSmall BusinessMobileLanguage
+Upgrade Your Account LinkedIn Corporation © 2017
+User AgreementPrivacy PolicyAd ChoicesCommunity GuidelinesCookie PolicyCopyright PolicySend Feedback
+144.2.1.1
